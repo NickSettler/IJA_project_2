@@ -35,10 +35,7 @@ public class BaseField implements Field {
 
     @Override
     public Field nextField(Direction dirs) {
-        int rK = dirs == Direction.U ? -1 : dirs == Direction.D ? 1 : 0;
-        int cK = dirs == Direction.L ? -1 : dirs == Direction.R ? 1 : 0;
-
-        return this.commonMaze.getField(this.row + rK, this.col + cK);
+        return this.commonMaze.getField(this.row + dirs.y(), this.col + dirs.x());
     }
 
     @Override

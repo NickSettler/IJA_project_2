@@ -19,10 +19,7 @@ public class PacmanObject implements MazeObject {
 
     @Override
     public boolean canMove(Field.Direction dir) {
-        int rK = dir == Field.Direction.U ? -1 : dir == Field.Direction.D ? 1 : 0;
-        int cK = dir == Field.Direction.L ? -1 : dir == Field.Direction.R ? 1 : 0;
-
-        Field nextField = this.commonMaze.getField(this.row + rK, this.col + cK);
+        Field nextField = this.commonMaze.getField(this.row + dir.y(), this.col + dir.x());
 
         return nextField != null && nextField.canMove();
     }
@@ -32,13 +29,10 @@ public class PacmanObject implements MazeObject {
         boolean canMove = this.canMove(dir);
 
         if (canMove) {
-            int rK = dir == Field.Direction.U ? -1 : dir == Field.Direction.D ? 1 : 0;
-            int cK = dir == Field.Direction.L ? -1 : dir == Field.Direction.R ? 1 : 0;
+            this.commonMaze.moveObject(this, this.row + dir.y(), this.col + dir.x());
 
-            this.commonMaze.moveObject(this, this.row + rK, this.col + cK);
-
-            this.row += rK;
-            this.col += cK;
+            this.row += dir.y();
+            this.col += dir.x();
 
             return true;
         }
