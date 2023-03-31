@@ -1,8 +1,8 @@
 
-Otevreni dokumentace (API): v adresari doc otevrete v prohlizeci soubor index.html
+# Prelozi a spusti aplikaci s vizualizerem
+javac -cp .:ijatool.jar -d build ija/ija2022/homework2/Homework2.java 
+java -cp ./build:ijatool.jar ija.ija2022.homework2.Homework2
 
-Kompilace s vyuzitim JUnit:
-javac -cp .:junit-platform-console-standalone-1.6.0.jar ija/ija2022/homework1/Homework1Test.java 
-
-Spusteni testu s vyuzitim JUnit:
-java -cp .:junit-platform-console-standalone-1.6.0.jar org.junit.runner.JUnitCore ija.ija2022.homework1.Homework1Test
+# Prelozi a spusti testy
+#javac -cp .:ijatool.jar:junit-platform-console-standalone-1.6.0.jar -d build ija/ija2022/homework2/Homework2Test.java 
+#java -cp ./build:ijatool.jar:junit-platform-console-standalone-1.6.0.jar org.junit.runner.JUnitCore ija.ija2022.homework2.Homework2Test
