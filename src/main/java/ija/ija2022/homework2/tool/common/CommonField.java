@@ -1,6 +1,6 @@
 package ija.ija2022.homework2.tool.common;
 
-public interface Field {
+public interface CommonField extends Observable {
     enum Direction {
         D(0, 1), L(-1, 0), R(1, 0), U(0, -1);
 
@@ -23,15 +23,15 @@ public interface Field {
 
     boolean canMove();
 
-    MazeObject get();
+    CommonMazeObject get();
 
     boolean isEmpty();
 
-    Field nextField(Field.Direction dirs);
+    CommonField nextField(CommonField.Direction dirs);
 
-    boolean put(MazeObject object);
+    boolean put(CommonMazeObject object);
 
-    boolean remove(MazeObject object);
+    boolean remove(CommonMazeObject object);
 
     void setMaze(CommonMaze commonMaze);
 }

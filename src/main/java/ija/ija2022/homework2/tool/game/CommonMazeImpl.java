@@ -1,23 +1,21 @@
 package ija.ija2022.homework2.tool.game;
 
+import ija.ija2022.homework2.tool.common.CommonField;
 import ija.ija2022.homework2.tool.common.CommonMaze;
-import ija.ija2022.homework2.tool.common.Field;
-import ija.ija2022.homework2.tool.common.MazeObject;
+import ija.ija2022.homework2.tool.common.CommonMazeObject;
 
 public class CommonMazeImpl implements CommonMaze {
-    private int rows;
-    private int cols;
-    private Field[][] fields;
+    private final int rows;
+    private final int cols;
+    private final CommonField[][] commonFields;
 
-    private PacmanObject pacman;
-
-    private MazeObject objects[];
+    private final CommonMazeObject[][] objects;
 
     public CommonMazeImpl(int rows, int cols) {
         this.rows = rows + 2;
         this.cols = cols + 2;
-        this.fields = new Field[this.rows][this.cols];
-        this.objects = new MazeObject[this.rows * this.cols];
+        this.commonFields = new CommonField[this.rows][this.cols];
+        this.objects = new CommonMazeObject[this.rows * this.cols][1];
 
         this.generateWalls();
     }
@@ -26,21 +24,21 @@ public class CommonMazeImpl implements CommonMaze {
         for (int i = 0; i < this.rows; i++) {
             for (int j = 0; j < this.cols; j++) {
                 if (i == 0 || i == this.rows - 1 || j == 0 || j == this.cols - 1) {
-                    this.fields[i][j] = new WallField(i, j);
+                    this.commonFields[i][j] = new WallCommonField(i, j);
                 }
             }
         }
     }
 
     @Override
-    public Field getField(int row, int col) {
+    public CommonField getField(int row, int col) {
         if (row < 0 || row >= this.rows)
             return null;
 
         if (col < 0 || col >= this.cols)
             return null;
 
-        return this.fields[row][col];
+        return this.commonFields[row][col];
     }
 
     @Override
@@ -54,37 +52,49 @@ public class CommonMazeImpl implements CommonMaze {
     }
 
     @Override
-    public void setField(int row, int col, Field field) {
-        this.fields[row][col] = field;
+    public void setField(int row, int col, CommonField commonField) {
+        this.commonFields[row][col] = commonField;
     }
 
     @Override
-    public Field[][] getFields() {
-        return this.fields;
+    public CommonField[][] getFields() {
+        return this.commonFields;
     }
 
     @Override
-    public void putObject(MazeObject object, int row, int col) {
+    public void putObject(CommonMazeObject object, int row, int col) {
         if (object == null)
             return;
 
-        this.objects[row * this.cols + col] = object;
+        this.objects[row * this.cols + col][0] = object;
     }
 
-    public void moveObject(MazeObject object, int row, int col) {
+    public void moveObject(CommonMazeObject object, int row, int col) {
         if (object == null)
             return;
 
         int oldRow = object.getRow();
         int oldCol = object.getCol();
 
-        this.objects[oldRow * this.cols + oldCol] = null;
-        this.objects[row * this.cols + col] = object;
+        this.objects[oldRow * this.cols + oldCol][0] = null;
+        this.objects[row * this.cols + col][0] = object;
     }
 
     @Override
-    public MazeObject getObject(int row, int col) {
+    public CommonMazeObject[] getObjectsList(int row, int col) {
         return this.objects[row * this.cols + col];
+    }
+
+    public PacmanObjectCommon getPacman() {
+        for (CommonMazeObject[] objectsCollection : this.objects) {
+            for (CommonMazeObject object : objectsCollection) {
+                if (object instanceof PacmanObjectCommon) {
+                    return (PacmanObjectCommon) object;
+                }
+            }
+        }
+
+        return null;
     }
 
     @Override

@@ -3,13 +3,13 @@
  * Testovací třída.
  */
 
+import ija.ija2022.homework2.tool.common.CommonField;
 import ija.ija2022.homework2.tool.common.CommonMaze;
-import ija.ija2022.homework2.tool.common.Field;
-import ija.ija2022.homework2.tool.common.MazeObject;
+import ija.ija2022.homework2.tool.common.CommonMazeObject;
 import ija.ija2022.homework2.tool.game.MazeConfigure;
-import ija.ija2022.homework2.tool.game.PacmanObject;
-import ija.ija2022.homework2.tool.game.PathField;
-import ija.ija2022.homework2.tool.game.WallField;
+import ija.ija2022.homework2.tool.game.PacmanObjectCommon;
+import ija.ija2022.homework2.tool.game.PathCommonField;
+import ija.ija2022.homework2.tool.game.WallCommonField;
 import org.junit.Test;
 import org.junit.Assert;
 
@@ -65,29 +65,29 @@ public class Homework1Test {
         // Testy, zda je bludiste ohraniceno zdi.
         // Testuje se pouze prvni radek.
         for (int c = 0; c < 5; c++) {
-            Field f1 = new WallField(0,c);
-            Field f2 = commonMaze.getField(0, c);
+            CommonField f1 = new WallCommonField(0,c);
+            CommonField f2 = commonMaze.getField(0, c);
             Assert.assertEquals("Pole reprezentujici zed", f1, f2);
             Assert.assertTrue("Pole reprezentujici zed nema zadny objekt", f2.isEmpty());
             Assert.assertFalse("Na pole reprezentujici zed se nelze presunout", f2.canMove());
         }
 
-        Field f1 = new WallField(2,2);
-        Field f2 = commonMaze.getField(2, 2);
+        CommonField f1 = new WallCommonField(2,2);
+        CommonField f2 = commonMaze.getField(2, 2);
         Assert.assertEquals("Pole reprezentujici zed", f1, f2);
         Assert.assertTrue("Pole reprezentujici zed nema zadny objekt", f2.isEmpty());
         Assert.assertFalse("Na pole reprezentujici zed se nelze presunout", f2.canMove());
 
-        Field f3 = new PathField(2,1);
-        f1 = new WallField(2,1);
-        Field f4 = commonMaze.getField(2, 1);
+        CommonField f3 = new PathCommonField(2,1);
+        f1 = new WallCommonField(2,1);
+        CommonField f4 = commonMaze.getField(2, 1);
         Assert.assertEquals("Pole reprezentujici cestu", f3, f4);
         Assert.assertNotEquals("Pole reprezentujici cestu", f1, f4);
         Assert.assertTrue("Pole je zatim prazdne", f4.isEmpty());
         Assert.assertTrue("Na pole reprezentujici cestu se lze presunout", f4.canMove());        
 
-        Field f5 = new PathField(4,2);
-        Field f6 = commonMaze.getField(4, 2);
+        CommonField f5 = new PathCommonField(4,2);
+        CommonField f6 = commonMaze.getField(4, 2);
         Assert.assertEquals("Pole reprezentujici cestu", f5, f6);
         Assert.assertFalse("Pole neni prazdne", f6.isEmpty());
         Assert.assertTrue("Na pole reprezentujici cestu se lze presunout", f6.canMove());        
@@ -102,15 +102,15 @@ public class Homework1Test {
     public void test04() {
         CommonMaze commonMaze = createTestMaze();
         
-        Field f1 = commonMaze.getField(4, 2);
-        Field f2 = f1.nextField(Field.Direction.R);
-        Field f3 = f1.nextField(Field.Direction.D);
+        CommonField f1 = commonMaze.getField(4, 2);
+        CommonField f2 = f1.nextField(CommonField.Direction.R);
+        CommonField f3 = f1.nextField(CommonField.Direction.D);
         
         Assert.assertTrue("Pacman se muze posunout na pole f2", f2.canMove());
         Assert.assertFalse("Pacman se nemuze posunout na pole f3", f3.canMove());
         
-        MazeObject obj = f1.get();
-        Assert.assertTrue("Objekt je instanci tridy PacmanObject", obj instanceof PacmanObject);
+        CommonMazeObject obj = f1.get();
+        Assert.assertTrue("Objekt je instanci tridy PacmanObject", obj instanceof PacmanObjectCommon);
         
         Assert.assertFalse("Pole f1 neni prazdne", f1.isEmpty());
         Assert.assertTrue("Odebrani pacmana z pole f1", f1.remove(obj));
@@ -136,26 +136,26 @@ public class Homework1Test {
     public void test05() {
         CommonMaze commonMaze = createTestMaze();
         
-        Field f = commonMaze.getField(4, 2);
-        MazeObject obj = f.get();
+        CommonField f = commonMaze.getField(4, 2);
+        CommonMazeObject obj = f.get();
         
-        Assert.assertTrue("Pacman se muze posunout doprava", obj.canMove(Field.Direction.R));
-        Assert.assertTrue("Pacman se muze posunout doleva", obj.canMove(Field.Direction.L));
-        Assert.assertFalse("Pacman se nemuze posunout nahoru", obj.canMove(Field.Direction.U));
-        Assert.assertFalse("Pacman se nemuze posunout dolu", obj.canMove(Field.Direction.D));
+        Assert.assertTrue("Pacman se muze posunout doprava", obj.canMove(CommonField.Direction.R));
+        Assert.assertTrue("Pacman se muze posunout doleva", obj.canMove(CommonField.Direction.L));
+        Assert.assertFalse("Pacman se nemuze posunout nahoru", obj.canMove(CommonField.Direction.U));
+        Assert.assertFalse("Pacman se nemuze posunout dolu", obj.canMove(CommonField.Direction.D));
         
-        Assert.assertFalse("Posun nahoru se nezdari", obj.move(Field.Direction.U));
+        Assert.assertFalse("Posun nahoru se nezdari", obj.move(CommonField.Direction.U));
         Assert.assertFalse("Puvodni misto pacmana je obsazeno", f.isEmpty());
-        Assert.assertTrue("Vedlejsi misto je volne", f.nextField(Field.Direction.U).isEmpty());
-        Assert.assertFalse("Posun dolu se nezdari", obj.move(Field.Direction.D));
+        Assert.assertTrue("Vedlejsi misto je volne", f.nextField(CommonField.Direction.U).isEmpty());
+        Assert.assertFalse("Posun dolu se nezdari", obj.move(CommonField.Direction.D));
         Assert.assertFalse("Puvodni misto pacmana je obsazeno", f.isEmpty());
-        Assert.assertTrue("Vedlejsi misto je volne", f.nextField(Field.Direction.D).isEmpty());
+        Assert.assertTrue("Vedlejsi misto je volne", f.nextField(CommonField.Direction.D).isEmpty());
         
-        Assert.assertTrue("Posun doleva se zdari", obj.move(Field.Direction.L));
+        Assert.assertTrue("Posun doleva se zdari", obj.move(CommonField.Direction.L));
         Assert.assertTrue("Puvodni misto pacmana je volne", f.isEmpty());
-        Assert.assertFalse("Vedlejsi misto je obsazene", f.nextField(Field.Direction.L).isEmpty());
+        Assert.assertFalse("Vedlejsi misto je obsazene", f.nextField(CommonField.Direction.L).isEmpty());
         
-        Assert.assertEquals("Na novem miste je stejny pacman", obj, f.nextField(Field.Direction.L).get());        
+        Assert.assertEquals("Na novem miste je stejny pacman", obj, f.nextField(CommonField.Direction.L).get());
     }    
     
     /**

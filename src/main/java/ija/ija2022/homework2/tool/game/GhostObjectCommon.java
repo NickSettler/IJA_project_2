@@ -1,31 +1,31 @@
 package ija.ija2022.homework2.tool.game;
 
 import ija.ija2022.homework2.tool.common.CommonMaze;
-import ija.ija2022.homework2.tool.common.Field;
-import ija.ija2022.homework2.tool.common.MazeObject;
+import ija.ija2022.homework2.tool.common.CommonField;
+import ija.ija2022.homework2.tool.common.CommonMazeObject;
 
-public class PacmanObject implements MazeObject {
+public class GhostObjectCommon implements CommonMazeObject {
     private int row;
 
     private int col;
 
     private CommonMaze commonMaze;
 
-    public PacmanObject(int row, int col, CommonMaze commonMaze) {
+    public GhostObjectCommon(int row, int col, CommonMaze commonMaze) {
         this.row = row;
         this.col = col;
         this.commonMaze = commonMaze;
     }
 
     @Override
-    public boolean canMove(Field.Direction dir) {
-        Field nextField = this.commonMaze.getField(this.row + dir.y(), this.col + dir.x());
+    public boolean canMove(CommonField.Direction dir) {
+        CommonField nextCommonField = this.commonMaze.getField(this.row + dir.y(), this.col + dir.x());
 
-        return nextField != null && nextField.canMove();
+        return nextCommonField != null && nextCommonField.canMove();
     }
 
     @Override
-    public boolean move(Field.Direction dir) {
+    public boolean move(CommonField.Direction dir) {
         boolean canMove = this.canMove(dir);
 
         if (canMove) {
@@ -40,11 +40,23 @@ public class PacmanObject implements MazeObject {
         return false;
     }
 
+    @Override
     public int getRow() {
         return this.row;
     }
 
+    @Override
     public int getCol() {
         return this.col;
+    }
+
+    @Override
+    public boolean isPacman() {
+        return false;
+    }
+
+    @Override
+    public int getLives() {
+        return 0;
     }
 }

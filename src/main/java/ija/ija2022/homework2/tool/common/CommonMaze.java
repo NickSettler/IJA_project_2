@@ -1,21 +1,25 @@
 package ija.ija2022.homework2.tool.common;
 
+import ija.ija2022.homework2.tool.game.PacmanObjectCommon;
+
 public interface CommonMaze {
-    Field getField(int row, int col);
+    CommonField getField(int row, int col);
 
     int numCols();
 
     int numRows();
 
-    void setField(int row, int col, Field field);
+    void setField(int row, int col, CommonField commonField);
 
-    Field[][] getFields();
+    CommonField[][] getFields();
 
-    void putObject(MazeObject object, int row, int col);
+    void putObject(CommonMazeObject object, int row, int col);
 
-    void moveObject(MazeObject object, int row, int col);
+    void moveObject(CommonMazeObject object, int row, int col);
 
-    MazeObject getObject(int row, int col);
+    CommonMazeObject[] getObjectsList(int row, int col);
+
+    PacmanObjectCommon getPacman();
 
     void removeObject(int row, int col);
 }

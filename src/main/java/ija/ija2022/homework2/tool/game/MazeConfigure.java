@@ -1,6 +1,6 @@
 package ija.ija2022.homework2.tool.game;
 
-import ija.ija2022.homework2.tool.common.Field;
+import ija.ija2022.homework2.tool.common.CommonField;
 import ija.ija2022.homework2.tool.common.CommonMaze;
 
 public class MazeConfigure {
@@ -57,12 +57,12 @@ public class MazeConfigure {
         for (int i = 0; i < line.length(); i++) {
             char ch = line.charAt(i);
 
-            Field field = ch == 'X' ? new WallField(this.rowCounter, i + 1) : new PathField(this.rowCounter, i + 1);
+            CommonField commonField = ch == 'X' ? new WallCommonField(this.rowCounter, i + 1) : new PathCommonField(this.rowCounter, i + 1);
 
             if (ch == 'S')
-                this.commonMaze.putObject(new PacmanObject(this.rowCounter, i + 1, this.commonMaze), this.rowCounter, i + 1);
-            this.commonMaze.setField(this.rowCounter, i + 1, field);
-            field.setMaze(this.commonMaze);
+                this.commonMaze.putObject(new PacmanObjectCommon(this.rowCounter, i + 1, this.commonMaze), this.rowCounter, i + 1);
+            this.commonMaze.setField(this.rowCounter, i + 1, commonField);
+            commonField.setMaze(this.commonMaze);
         }
 
         this.rowCounter++;

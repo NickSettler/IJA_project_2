@@ -1,7 +1,8 @@
 package ija.ija2022.homework2;
 
+import ija.ija2022.homework2.tool.MazePresenter;
 import ija.ija2022.homework2.tool.common.CommonMaze;
-import ija.ija2022.homework2.tool.common.Field;
+import ija.ija2022.homework2.tool.common.CommonField;
 import ija.ija2022.homework2.tool.game.MazeConfigure;
 
 public class Main {
@@ -15,6 +16,11 @@ public class Main {
         cfg.stopReading();
 
         CommonMaze commonMaze = cfg.createMaze();
-        Field path = commonMaze.getField(0, 0);
+
+        MazePresenter presenter = new MazePresenter(commonMaze);
+        presenter.open();
+
+        commonMaze.getPacman().move(CommonField.Direction.R);
+        commonMaze.getPacman().move(CommonField.Direction.U);
     }
 }

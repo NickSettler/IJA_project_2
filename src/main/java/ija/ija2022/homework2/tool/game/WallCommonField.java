@@ -1,10 +1,10 @@
 package ija.ija2022.homework2.tool.game;
 
-import ija.ija2022.homework2.tool.common.Field;
-import ija.ija2022.homework2.tool.common.MazeObject;
+import ija.ija2022.homework2.tool.common.CommonField;
+import ija.ija2022.homework2.tool.common.CommonMazeObject;
 
-public class WallField extends BaseField implements Field {
-    public WallField(int row, int col) {
+public class WallCommonField extends BaseCommonField implements CommonField {
+    public WallCommonField(int row, int col) {
         super(row, col);
     }
 
@@ -14,7 +14,7 @@ public class WallField extends BaseField implements Field {
     }
 
     @Override
-    public MazeObject get() {
+    public CommonMazeObject get() {
         return null;
     }
 
@@ -24,12 +24,12 @@ public class WallField extends BaseField implements Field {
     }
 
     @Override
-    public boolean put(MazeObject object) {
+    public boolean put(CommonMazeObject object) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean remove(MazeObject object) {
+    public boolean remove(CommonMazeObject object) {
         throw new UnsupportedOperationException();
     }
 }

@@ -1,19 +1,22 @@
 package ija.ija2022.homework2.tool.game;
 
 import ija.ija2022.homework2.tool.common.CommonMaze;
-import ija.ija2022.homework2.tool.common.Field;
-import ija.ija2022.homework2.tool.common.MazeObject;
+import ija.ija2022.homework2.tool.common.CommonField;
+import ija.ija2022.homework2.tool.common.CommonMazeObject;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class BaseField implements Field {
+public class BaseCommonField implements CommonField {
     protected int row;
 
     protected int col;
 
     protected CommonMaze commonMaze;
 
-    public BaseField(int row, int col) {
+    private ArrayList<Observer> observers = new ArrayList<>();
+
+    public BaseCommonField(int row, int col) {
         this.row = row;
         this.col = col;
     }
@@ -24,7 +27,7 @@ public class BaseField implements Field {
     }
 
     @Override
-    public MazeObject get() {
+    public CommonMazeObject get() {
         return null;
     }
 
@@ -34,17 +37,17 @@ public class BaseField implements Field {
     }
 
     @Override
-    public Field nextField(Direction dirs) {
+    public CommonField nextField(Direction dirs) {
         return this.commonMaze.getField(this.row + dirs.y(), this.col + dirs.x());
     }
 
     @Override
-    public boolean put(MazeObject object) {
+    public boolean put(CommonMazeObject object) {
         return false;
     }
 
     @Override
-    public boolean remove(MazeObject object) {
+    public boolean remove(CommonMazeObject object) {
         return false;
     }
 
@@ -58,7 +61,7 @@ public class BaseField implements Field {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        BaseField baseField = (BaseField) o;
+        BaseCommonField baseField = (BaseCommonField) o;
 
         if (row != baseField.row) return false;
         return col == baseField.col;
@@ -67,5 +70,22 @@ public class BaseField implements Field {
     @Override
     public int hashCode() {
         return Objects.hash(row, col, commonMaze);
+    }
+
+    @Override
+    public void addObserver(Observer o) {
+        this.observers.add(o);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer observer : this.observers) {
+            observer.update(this);
+        }
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+        this.observers.remove(o);
     }
 }
