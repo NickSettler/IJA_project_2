@@ -1,20 +1,20 @@
-package ija.ija2022.homework2.game;
+package ija.ija2022.homework2.tool.game;
 
-import ija.ija2022.homework2.common.Field;
-import ija.ija2022.homework2.common.Maze;
-import ija.ija2022.homework2.common.MazeObject;
+import ija.ija2022.homework2.tool.common.CommonMaze;
+import ija.ija2022.homework2.tool.common.Field;
+import ija.ija2022.homework2.tool.common.MazeObject;
 
 public class PacmanObject implements MazeObject {
     private int row;
 
     private int col;
 
-    private Maze maze;
+    private CommonMaze commonMaze;
 
-    public PacmanObject(int row, int col, Maze maze) {
+    public PacmanObject(int row, int col, CommonMaze commonMaze) {
         this.row = row;
         this.col = col;
-        this.maze = maze;
+        this.commonMaze = commonMaze;
     }
 
     @Override
@@ -22,7 +22,7 @@ public class PacmanObject implements MazeObject {
         int rK = dir == Field.Direction.U ? -1 : dir == Field.Direction.D ? 1 : 0;
         int cK = dir == Field.Direction.L ? -1 : dir == Field.Direction.R ? 1 : 0;
 
-        Field nextField = this.maze.getField(this.row + rK, this.col + cK);
+        Field nextField = this.commonMaze.getField(this.row + rK, this.col + cK);
 
         return nextField != null && nextField.canMove();
     }
@@ -35,7 +35,7 @@ public class PacmanObject implements MazeObject {
             int rK = dir == Field.Direction.U ? -1 : dir == Field.Direction.D ? 1 : 0;
             int cK = dir == Field.Direction.L ? -1 : dir == Field.Direction.R ? 1 : 0;
 
-            this.maze.moveObject(this, this.row + rK, this.col + cK);
+            this.commonMaze.moveObject(this, this.row + rK, this.col + cK);
 
             this.row += rK;
             this.col += cK;

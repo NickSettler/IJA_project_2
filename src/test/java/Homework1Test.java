@@ -3,13 +3,13 @@
  * Testovací třída.
  */
 
-import ija.ija2022.homework2.common.Field;
-import ija.ija2022.homework2.common.Maze;
-import ija.ija2022.homework2.common.MazeObject;
-import ija.ija2022.homework2.game.MazeConfigure;
-import ija.ija2022.homework2.game.PacmanObject;
-import ija.ija2022.homework2.game.PathField;
-import ija.ija2022.homework2.game.WallField;
+import ija.ija2022.homework2.tool.common.CommonMaze;
+import ija.ija2022.homework2.tool.common.Field;
+import ija.ija2022.homework2.tool.common.MazeObject;
+import ija.ija2022.homework2.tool.game.MazeConfigure;
+import ija.ija2022.homework2.tool.game.PacmanObject;
+import ija.ija2022.homework2.tool.game.PathField;
+import ija.ija2022.homework2.tool.game.WallField;
 import org.junit.Test;
 import org.junit.Assert;
 
@@ -31,8 +31,8 @@ public class Homework1Test {
         cfg.processLine(".Z.");
         cfg.stopReading();
 
-        Maze maze = cfg.createMaze();
-        Assert.assertNull("Vytvoreni bludiste se nezdarilo", maze);
+        CommonMaze commonMaze = cfg.createMaze();
+        Assert.assertNull("Vytvoreni bludiste se nezdarilo", commonMaze);
     }
 
     /**
@@ -48,10 +48,10 @@ public class Homework1Test {
         cfg.processLine(".S.");
         cfg.stopReading();
 
-        Maze maze = cfg.createMaze();
-        Assert.assertNotNull("Vytvoreni bludiste se zdarilo", maze);
-        Assert.assertEquals("Pocet radku bludiste (vcetne krajnich zdi)", 6, maze.numRows());
-        Assert.assertEquals("Pocet sloupcu bludiste (vcetne krajnich zdi)", 5, maze.numCols());
+        CommonMaze commonMaze = cfg.createMaze();
+        Assert.assertNotNull("Vytvoreni bludiste se zdarilo", commonMaze);
+        Assert.assertEquals("Pocet radku bludiste (vcetne krajnich zdi)", 6, commonMaze.numRows());
+        Assert.assertEquals("Pocet sloupcu bludiste (vcetne krajnich zdi)", 5, commonMaze.numCols());
     }
     
     /**
@@ -60,34 +60,34 @@ public class Homework1Test {
      */
     @Test
     public void test03() {
-        Maze maze = createTestMaze();
+        CommonMaze commonMaze = createTestMaze();
         
         // Testy, zda je bludiste ohraniceno zdi.
         // Testuje se pouze prvni radek.
         for (int c = 0; c < 5; c++) {
             Field f1 = new WallField(0,c);
-            Field f2 = maze.getField(0, c);        
+            Field f2 = commonMaze.getField(0, c);
             Assert.assertEquals("Pole reprezentujici zed", f1, f2);
             Assert.assertTrue("Pole reprezentujici zed nema zadny objekt", f2.isEmpty());
             Assert.assertFalse("Na pole reprezentujici zed se nelze presunout", f2.canMove());
         }
 
         Field f1 = new WallField(2,2);
-        Field f2 = maze.getField(2, 2);        
+        Field f2 = commonMaze.getField(2, 2);
         Assert.assertEquals("Pole reprezentujici zed", f1, f2);
         Assert.assertTrue("Pole reprezentujici zed nema zadny objekt", f2.isEmpty());
         Assert.assertFalse("Na pole reprezentujici zed se nelze presunout", f2.canMove());
 
         Field f3 = new PathField(2,1);
         f1 = new WallField(2,1);
-        Field f4 = maze.getField(2, 1);        
+        Field f4 = commonMaze.getField(2, 1);
         Assert.assertEquals("Pole reprezentujici cestu", f3, f4);
         Assert.assertNotEquals("Pole reprezentujici cestu", f1, f4);
         Assert.assertTrue("Pole je zatim prazdne", f4.isEmpty());
         Assert.assertTrue("Na pole reprezentujici cestu se lze presunout", f4.canMove());        
 
         Field f5 = new PathField(4,2);
-        Field f6 = maze.getField(4, 2);        
+        Field f6 = commonMaze.getField(4, 2);
         Assert.assertEquals("Pole reprezentujici cestu", f5, f6);
         Assert.assertFalse("Pole neni prazdne", f6.isEmpty());
         Assert.assertTrue("Na pole reprezentujici cestu se lze presunout", f6.canMove());        
@@ -100,9 +100,9 @@ public class Homework1Test {
      */
     @Test
     public void test04() {
-        Maze maze = createTestMaze();
+        CommonMaze commonMaze = createTestMaze();
         
-        Field f1 = maze.getField(4, 2);
+        Field f1 = commonMaze.getField(4, 2);
         Field f2 = f1.nextField(Field.Direction.R);
         Field f3 = f1.nextField(Field.Direction.D);
         
@@ -134,9 +134,9 @@ public class Homework1Test {
      */
     @Test
     public void test05() {
-        Maze maze = createTestMaze();
+        CommonMaze commonMaze = createTestMaze();
         
-        Field f = maze.getField(4, 2);
+        Field f = commonMaze.getField(4, 2);
         MazeObject obj = f.get();
         
         Assert.assertTrue("Pacman se muze posunout doprava", obj.canMove(Field.Direction.R));
@@ -162,7 +162,7 @@ public class Homework1Test {
      * Pomocná metoda pro vytvoření testovacího bludiště. Využito v testech 03, 04 a 05.
      * @return Vytvoné bludiště.
      */
-    private Maze createTestMaze() {
+    private CommonMaze createTestMaze() {
         MazeConfigure cfg = new MazeConfigure();
         cfg.startReading(4, 3);
         cfg.processLine("...");

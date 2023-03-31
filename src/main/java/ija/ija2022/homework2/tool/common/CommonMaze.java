@@ -1,6 +1,6 @@
-package ija.ija2022.homework2.common;
+package ija.ija2022.homework2.tool.common;
 
-public interface Maze {
+public interface CommonMaze {
     Field getField(int row, int col);
 
     int numCols();

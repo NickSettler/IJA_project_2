@@ -1,8 +1,8 @@
 package ija.ija2022.homework2;
 
-import ija.ija2022.homework2.common.Field;
-import ija.ija2022.homework2.common.Maze;
-import ija.ija2022.homework2.game.MazeConfigure;
+import ija.ija2022.homework2.tool.common.CommonMaze;
+import ija.ija2022.homework2.tool.common.Field;
+import ija.ija2022.homework2.tool.game.MazeConfigure;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,7 +14,7 @@ public class Main {
         cfg.processLine(".S.");
         cfg.stopReading();
 
-        Maze maze = cfg.createMaze();
-        Field path = maze.getField(0, 0);
+        CommonMaze commonMaze = cfg.createMaze();
+        Field path = commonMaze.getField(0, 0);
     }
 }

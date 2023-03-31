@@ -1,7 +1,7 @@
-package ija.ija2022.homework2.game;
+package ija.ija2022.homework2.tool.game;
 
-import ija.ija2022.homework2.common.Field;
-import ija.ija2022.homework2.common.MazeObject;
+import ija.ija2022.homework2.tool.common.Field;
+import ija.ija2022.homework2.tool.common.MazeObject;
 
 public class WallField extends BaseField implements Field {
     public WallField(int row, int col) {

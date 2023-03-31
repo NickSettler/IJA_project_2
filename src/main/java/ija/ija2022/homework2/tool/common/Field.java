@@ -1,4 +1,4 @@
-package ija.ija2022.homework2.common;
+package ija.ija2022.homework2.tool.common;
 
 public interface Field {
     enum Direction {
@@ -17,5 +17,5 @@ public interface Field {
 
     boolean remove(MazeObject object);
 
-    void setMaze(Maze maze);
+    void setMaze(CommonMaze commonMaze);
 }

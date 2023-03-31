@@ -1,43 +1,43 @@
-package ija.ija2022.homework2.game;
+package ija.ija2022.homework2.tool.game;
 
-import ija.ija2022.homework2.common.Field;
-import ija.ija2022.homework2.common.Maze;
+import ija.ija2022.homework2.tool.common.Field;
+import ija.ija2022.homework2.tool.common.CommonMaze;
 
 public class MazeConfigure {
     private boolean reading;
 
     private int rowCounter;
 
-    private Maze maze;
+    private CommonMaze commonMaze;
 
     public MazeConfigure() {
         this.reading = false;
         this.rowCounter = 1;
-        this.maze = null;
+        this.commonMaze = null;
     }
 
     private boolean checkLine(String line) {
         if (line == null) return false;
 
-        if (line.length() != this.maze.numCols() - 2) return false;
+        if (line.length() != this.commonMaze.numCols() - 2) return false;
 
         return line.matches("^[.XS]+$");
     }
 
-    public Maze createMaze() {
+    public CommonMaze createMaze() {
         if (this.reading) {
             return null;
         }
 
-        if (this.maze.getFields() == null) {
+        if (this.commonMaze.getFields() == null) {
             return null;
         }
 
-        if (this.rowCounter != this.maze.numRows()) {
+        if (this.rowCounter != this.commonMaze.numRows()) {
             return null;
         }
 
-        return this.maze;
+        return this.commonMaze;
     }
 
     public boolean processLine(String line) {
@@ -49,7 +49,7 @@ public class MazeConfigure {
             return false;
         }
 
-        if (this.rowCounter >= this.maze.numRows()) {
+        if (this.rowCounter >= this.commonMaze.numRows()) {
             this.rowCounter++;
             return false;
         }
@@ -60,9 +60,9 @@ public class MazeConfigure {
             Field field = ch == 'X' ? new WallField(this.rowCounter, i + 1) : new PathField(this.rowCounter, i + 1);
 
             if (ch == 'S')
-                this.maze.putObject(new PacmanObject(this.rowCounter, i + 1, this.maze), this.rowCounter, i + 1);
-            this.maze.setField(this.rowCounter, i + 1, field);
-            field.setMaze(this.maze);
+                this.commonMaze.putObject(new PacmanObject(this.rowCounter, i + 1, this.commonMaze), this.rowCounter, i + 1);
+            this.commonMaze.setField(this.rowCounter, i + 1, field);
+            field.setMaze(this.commonMaze);
         }
 
         this.rowCounter++;
@@ -75,7 +75,7 @@ public class MazeConfigure {
             return;
         }
 
-        if (this.maze != null && this.maze.getFields() != null) {
+        if (this.commonMaze != null && this.commonMaze.getFields() != null) {
             return;
         }
 
@@ -85,7 +85,7 @@ public class MazeConfigure {
 
         this.reading = true;
         this.rowCounter = 1;
-        this.maze = new MazeImpl(rows, cols);
+        this.commonMaze = new CommonMazeImpl(rows, cols);
     }
 
     public boolean stopReading() {

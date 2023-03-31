@@ -1,7 +1,7 @@
-package ija.ija2022.homework2.game;
+package ija.ija2022.homework2.tool.game;
 
-import ija.ija2022.homework2.common.Field;
-import ija.ija2022.homework2.common.MazeObject;
+import ija.ija2022.homework2.tool.common.Field;
+import ija.ija2022.homework2.tool.common.MazeObject;
 
 public class PathField extends BaseField implements Field {
     public PathField(int row, int col) {
@@ -17,12 +17,12 @@ public class PathField extends BaseField implements Field {
     public MazeObject get() {
         if (this.isEmpty()) return null;
 
-        return this.maze.getObject(this.row, this.col);
+        return this.commonMaze.getObject(this.row, this.col);
     }
 
     @Override
     public boolean isEmpty() {
-        MazeObject object = this.maze.getObject(this.row, this.col);
+        MazeObject object = this.commonMaze.getObject(this.row, this.col);
 
         return object == null;
     }
@@ -33,7 +33,7 @@ public class PathField extends BaseField implements Field {
 
         if (!this.isEmpty()) return false;
 
-        this.maze.putObject(object, this.row, this.col);
+        this.commonMaze.putObject(object, this.row, this.col);
 
         return true;
     }
@@ -44,7 +44,7 @@ public class PathField extends BaseField implements Field {
 
         if (this.isEmpty()) return false;
 
-        this.maze.removeObject(object.getRow(), object.getCol());
+        this.commonMaze.removeObject(object.getRow(), object.getCol());
 
         return true;
     }

@@ -1,8 +1,8 @@
-package ija.ija2022.homework2.game;
+package ija.ija2022.homework2.tool.game;
 
-import ija.ija2022.homework2.common.Field;
-import ija.ija2022.homework2.common.Maze;
-import ija.ija2022.homework2.common.MazeObject;
+import ija.ija2022.homework2.tool.common.CommonMaze;
+import ija.ija2022.homework2.tool.common.Field;
+import ija.ija2022.homework2.tool.common.MazeObject;
 
 import java.util.Objects;
 
@@ -11,7 +11,7 @@ public class BaseField implements Field {
 
     protected int col;
 
-    protected Maze maze;
+    protected CommonMaze commonMaze;
 
     public BaseField(int row, int col) {
         this.row = row;
@@ -38,7 +38,7 @@ public class BaseField implements Field {
         int rK = dirs == Direction.U ? -1 : dirs == Direction.D ? 1 : 0;
         int cK = dirs == Direction.L ? -1 : dirs == Direction.R ? 1 : 0;
 
-        return this.maze.getField(this.row + rK, this.col + cK);
+        return this.commonMaze.getField(this.row + rK, this.col + cK);
     }
 
     @Override
@@ -52,8 +52,8 @@ public class BaseField implements Field {
     }
 
     @Override
-    public void setMaze(Maze maze) {
-        this.maze = maze;
+    public void setMaze(CommonMaze commonMaze) {
+        this.commonMaze = commonMaze;
     }
 
     @Override
@@ -69,6 +69,6 @@ public class BaseField implements Field {
 
     @Override
     public int hashCode() {
-        return Objects.hash(row, col, maze);
+        return Objects.hash(row, col, commonMaze);
     }
 }
