@@ -1,7 +1,7 @@
-package ija.ija2022.homework1.game;
+package ija.ija2022.homework2.game;
 
-import ija.ija2022.homework1.common.Field;
-import ija.ija2022.homework1.common.MazeObject;
+import ija.ija2022.homework2.common.Field;
+import ija.ija2022.homework2.common.MazeObject;
 
 public class PathField extends BaseField implements Field {
     public PathField(int row, int col) {

@@ -3,13 +3,13 @@
  * Testovací třída.
  */
 
-import ija.ija2022.homework1.common.Field;
-import ija.ija2022.homework1.common.Maze;
-import ija.ija2022.homework1.common.MazeObject;
-import ija.ija2022.homework1.game.MazeConfigure;
-import ija.ija2022.homework1.game.PacmanObject;
-import ija.ija2022.homework1.game.PathField;
-import ija.ija2022.homework1.game.WallField;
+import ija.ija2022.homework2.common.Field;
+import ija.ija2022.homework2.common.Maze;
+import ija.ija2022.homework2.common.MazeObject;
+import ija.ija2022.homework2.game.MazeConfigure;
+import ija.ija2022.homework2.game.PacmanObject;
+import ija.ija2022.homework2.game.PathField;
+import ija.ija2022.homework2.game.WallField;
 import org.junit.Test;
 import org.junit.Assert;
 
