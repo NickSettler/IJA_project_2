@@ -109,7 +109,7 @@ public class Maze implements IMaze {
 
     @Override
     public void removeObject(int row, int col) {
-        this.fields[row][col].remove(
+//        this.fields[row][col].remove(
     }
 
     @Override
