@@ -1,14 +1,32 @@
 package ija.ija2022.homework2.tool.game;
 
 import ija.ija2022.homework2.tool.common.CommonField;
-import ija.ija2022.homework2.tool.common.CommonMaze;
+import ija.ija2022.homework2.tool.common.IField;
+import ija.ija2022.homework2.tool.common.IMaze;
+import ija.ija2022.homework2.tool.common.IMazeObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MazeConfigure {
+    private static final Map<Character, Class<?>> FIELDS_MAP = new HashMap<>() {{
+        put('.', PathField.class);
+        put('X', WallField.class);
+        put('K', WallField.class);
+        put('T', WallField.class);
+//        put('G', WallField.class);
+    }};
+
+    private static final Map<Character, Class<?>> OBJECTS_MAP = new HashMap<>() {{
+        put('S', PacmanObject.class);
+        put('G', GhostObject.class);
+    }};
+
     private boolean reading;
 
     private int rowCounter;
 
-    private CommonMaze commonMaze;
+    private IMaze commonMaze;
 
     public MazeConfigure() {
         this.reading = false;
@@ -21,10 +39,10 @@ public class MazeConfigure {
 
         if (line.length() != this.commonMaze.numCols() - 2) return false;
 
-        return line.matches("^[.XS]+$");
+        return line.matches("^[.XSGKT]+$");
     }
 
-    public CommonMaze createMaze() {
+    public IMaze createMaze() {
         if (this.reading) {
             return null;
         }
@@ -57,12 +75,31 @@ public class MazeConfigure {
         for (int i = 0; i < line.length(); i++) {
             char ch = line.charAt(i);
 
-            CommonField commonField = ch == 'X' ? new WallCommonField(this.rowCounter, i + 1) : new PathCommonField(this.rowCounter, i + 1);
+            boolean hasField = FIELDS_MAP.containsKey(ch);
+            boolean hasObject = OBJECTS_MAP.containsKey(ch);
 
-            if (ch == 'S')
-                this.commonMaze.putObject(new PacmanObjectCommon(this.rowCounter, i + 1, this.commonMaze), this.rowCounter, i + 1);
-            this.commonMaze.setField(this.rowCounter, i + 1, commonField);
-            commonField.setMaze(this.commonMaze);
+            if (hasField) {
+                try {
+                    IField field = (IField) FIELDS_MAP.get(ch).getConstructor(int.class, int.class).newInstance(this.rowCounter, i + 1);
+                    this.commonMaze.setField(this.rowCounter, i + 1, field);
+                    field.setMaze(this.commonMaze);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (hasObject) {
+                try {
+                    PathField field = new PathField(this.rowCounter, i + 1);
+                    IMazeObject object = (IMazeObject) OBJECTS_MAP.get(ch).getConstructor(int.class, int.class, IMaze.class).newInstance(this.rowCounter, i + 1, this.commonMaze);
+                    object.addObserver(this.commonMaze);
+                    this.commonMaze.putObject(object, this.rowCounter, i + 1);
+                    this.commonMaze.setField(this.rowCounter, i + 1, field);
+                    field.setMaze(this.commonMaze);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         this.rowCounter++;
@@ -85,7 +122,7 @@ public class MazeConfigure {
 
         this.reading = true;
         this.rowCounter = 1;
-        this.commonMaze = new CommonMazeImpl(rows, cols);
+        this.commonMaze = new Maze(rows, cols);
     }
 
     public boolean stopReading() {
