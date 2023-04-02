@@ -9,32 +9,12 @@ import java.util.List;
 public class PathField extends BaseField implements IField {
     public PathField(int row, int col) {
         super(row, col);
+        this.object = null;
     }
 
     @Override
     public boolean canMove() {
         return true;
-    }
-
-    @Override
-    public IMazeObject get() {
-        if (this.isEmpty()) return null;
-
-        List<CommonMazeObject> ghosts = this.commonMaze.ghosts();
-
-        for (CommonMazeObject commonMazeObject : ghosts) {
-            IMazeObject ghost = (IMazeObject) commonMazeObject;
-
-            if (ghost == null) continue;
-
-            if (ghost.getRow() == this.row && ghost.getCol() == this.col) return ghost;
-        }
-
-        PacmanObject pacman = this.commonMaze.getPacman();
-
-        if (pacman.getRow() == this.row && pacman.getCol() == this.col) return pacman;
-
-        return null;
     }
 
     @Override

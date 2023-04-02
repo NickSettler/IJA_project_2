@@ -12,7 +12,6 @@ public class Maze implements IMaze {
 
     private PacmanObject pacman;
 
-    private final List<CommonMazeObject> ghosts;
 
 //    private final Set<Observer> observers = new HashSet<>();
 
@@ -20,7 +19,6 @@ public class Maze implements IMaze {
         this.rows = rows + 2;
         this.cols = cols + 2;
         this.fields = new IField[this.rows][this.cols];
-        this.ghosts = new ArrayList<>(this.rows * this.cols);
 
         this.generateWalls();
     }
@@ -53,8 +51,19 @@ public class Maze implements IMaze {
 
     @Override
     public List<CommonMazeObject> ghosts() {
-        return this.ghosts;
+        List<CommonMazeObject> ghosts = new ArrayList<>();
+        for (IField[] fields: this.fields) {
+            for (IField field: fields) {
+                if (!(field instanceof WallField)){
+                    if (field.get() instanceof GhostObject) {
+                        ghosts.add(field.get());
+                    }
+                }
+            }
+        }
+        return ghosts;
     }
+
 
     @Override
     public int numRows() {
@@ -79,10 +88,12 @@ public class Maze implements IMaze {
         if (object instanceof PacmanObject) {
             this.pacman = (PacmanObject) object;
         } else if (object instanceof GhostObject) {
-            this.ghosts.add(object);
+            IField field = getField(row, col);
+            if (field instanceof WallField) {
+                return;
+            }
+            field.put(object);
         }
-
-        this.fields[row][col].put(object);
     }
 
     public void moveObject(IMazeObject object, int row, int col) {
@@ -92,12 +103,9 @@ public class Maze implements IMaze {
         if (object instanceof PacmanObject) {
             this.pacman = (PacmanObject) object;
         } else if (object instanceof GhostObject) {
-            for (CommonMazeObject ghost : ghosts) {
-                GhostObject ghostObject = (GhostObject) ghost;
-                this.ghosts.remove(ghostObject);
-            }
-
-            this.ghosts.add(object);
+            IField field = this.getField(row, col);
+            field.remove((IMazeObject) field.get());
+            field.put(object);
         }
 
 //        this.notifyObservers();
