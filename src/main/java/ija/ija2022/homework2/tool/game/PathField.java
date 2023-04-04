@@ -19,27 +19,30 @@ public class PathField extends BaseField implements IField {
 
     @Override
     public boolean isEmpty() {
-        List<CommonMazeObject> ghosts = this.commonMaze.ghosts();
-
-        for (CommonMazeObject commonMazeObject : ghosts) {
-            IMazeObject ghost = (IMazeObject) commonMazeObject;
-
-            if (ghost == null) continue;
-
-            if (ghost.getRow() == this.row && ghost.getCol() == this.col) return false;
+//        List<CommonMazeObject> ghosts = this.commonMaze.ghosts();
+//
+//        for (CommonMazeObject commonMazeObject : ghosts) {
+//            IMazeObject ghost = (IMazeObject) commonMazeObject;
+//
+//            if (ghost == null) continue;
+//
+//            if (ghost.getRow() == this.row && ghost.getCol() == this.col) return false;
+//        }
+//
+//        PacmanObject pacman = this.commonMaze.getPacman();
+//
+//        return pacman.getRow() != this.row || pacman.getCol() != this.col;
+        if (this.object == null) {
+            return true;
+        } else {
+            return false;
         }
-
-        PacmanObject pacman = this.commonMaze.getPacman();
-
-        return pacman.getRow() != this.row || pacman.getCol() != this.col;
     }
 
     @Override
     public boolean put(IMazeObject object) {
         if (object == null) return false;
-
         if (!this.isEmpty()) return false;
-
         this.object = object;
 
         this.notifyObservers();

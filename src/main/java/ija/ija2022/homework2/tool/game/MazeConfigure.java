@@ -14,7 +14,7 @@ public class MazeConfigure {
         put('X', WallField.class);
         put('K', WallField.class);
         put('T', WallField.class);
-//        put('G', WallField.class);
+//        put('G', PathField.class);
     }};
 
     private static final Map<Character, Class<?>> OBJECTS_MAP = new HashMap<>() {{
@@ -91,11 +91,11 @@ public class MazeConfigure {
             if (hasObject) {
                 try {
                     PathField field = new PathField(this.rowCounter, i + 1);
+                    this.commonMaze.setField(this.rowCounter, i + 1, field);
+                    field.setMaze(this.commonMaze);
                     IMazeObject object = (IMazeObject) OBJECTS_MAP.get(ch).getConstructor(int.class, int.class, IMaze.class).newInstance(this.rowCounter, i + 1, this.commonMaze);
                     object.addObserver(this.commonMaze);
                     this.commonMaze.putObject(object, this.rowCounter, i + 1);
-                    this.commonMaze.setField(this.rowCounter, i + 1, field);
-                    field.setMaze(this.commonMaze);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

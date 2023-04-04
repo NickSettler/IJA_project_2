@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4782bde2-2d90-4edc-91bb-c71f0ca0b5c0" name="Changes" comment="style: added ;">
+    <list default="true" id="4782bde2-2d90-4edc-91bb-c71f0ca0b5c0" name="Changes" comment="feat: moving object memorising from maze to fields">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ija2022/homework2/tool/game/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ija2022/homework2/tool/game/Maze.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ija2022/homework2/tool/game/MazeConfigure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ija2022/homework2/tool/game/MazeConfigure.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ija2022/homework2/tool/game/PathField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ija2022/homework2/tool/game/PathField.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,26 +40,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "last.edited.regexp": ".XS.SX.S.X",
-    "last_opened_file_path": "C:/Users/swimm/IdeaProjects/IJA_project_2/ijatool.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last.edited.regexp&quot;: &quot;.XS.SX.S.X&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/swimm/IdeaProjects/IJA_project_2/ijatool.jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/ija" />
@@ -73,7 +73,7 @@
       <recent name="ija.ija2022.homework1.game" />
     </key>
   </component>
-  <component name="RunManager" selected="JAR Application.ijatool.jar">
+  <component name="RunManager" selected="JUnit.Homework2Test">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ija.ija2022.homework1.Main" />
       <module name="ija001" />
@@ -96,12 +96,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Homework2Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ija001" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Homework2Test" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Homework2Test.testGhosts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ija001" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Homework2Test" />
+      <option name="METHOD_NAME" value="testGhosts" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ijatool.jar" type="JarApplication" temporary="true">
       <option name="JAR_PATH" value="$PROJECT_DIR$/ijatool.jar" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.Homework2Test" />
+        <item itemvalue="JUnit.Homework2Test.testGhosts" />
         <item itemvalue="JAR Application.ijatool.jar" />
         <item itemvalue="JUnit.Homework1Test" />
         <item itemvalue="Application.Main" />
@@ -129,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680370059073</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat: moving object memorising from maze to fields">
+      <created>1680429871413</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1680429871413</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,7 +176,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="style: added ;" />
-    <option name="LAST_COMMIT_MESSAGE" value="style: added ;" />
+    <MESSAGE value="feat: moving object memorising from maze to fields" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: moving object memorising from maze to fields" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
