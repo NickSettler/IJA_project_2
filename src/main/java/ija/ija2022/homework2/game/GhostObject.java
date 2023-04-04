@@ -1,4 +1,4 @@
-package ija.ija2022.homework2.tool.game;
+package ija.ija2022.homework2.game;
 
 import ija.ija2022.homework2.tool.common.*;
 
@@ -46,6 +46,13 @@ public class GhostObject implements IMazeObject {
 
         this.row = nextRow;
         this.col = nextCol;
+
+        PacmanObject pacman = this.commonMaze.getPacman();
+        if (pacman != null) {
+            if (pacman.getRow() == this.row && pacman.getCol() == this.col) {
+                pacman.decrLives();
+            }
+        }
 
         return true;
     }

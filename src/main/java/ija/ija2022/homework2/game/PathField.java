@@ -1,4 +1,4 @@
-package ija.ija2022.homework2.tool.game;
+package ija.ija2022.homework2.game;
 
 import ija.ija2022.homework2.tool.common.CommonMazeObject;
 import ija.ija2022.homework2.tool.common.IField;
@@ -19,24 +19,22 @@ public class PathField extends BaseField implements IField {
 
     @Override
     public boolean isEmpty() {
-//        List<CommonMazeObject> ghosts = this.commonMaze.ghosts();
-//
-//        for (CommonMazeObject commonMazeObject : ghosts) {
-//            IMazeObject ghost = (IMazeObject) commonMazeObject;
-//
-//            if (ghost == null) continue;
-//
-//            if (ghost.getRow() == this.row && ghost.getCol() == this.col) return false;
-//        }
-//
-//        PacmanObject pacman = this.commonMaze.getPacman();
-//
-//        return pacman.getRow() != this.row || pacman.getCol() != this.col;
-        if (this.object == null) {
-            return true;
-        } else {
-            return false;
+        if (this.commonMaze.getPacman() != null) {
+            if (this.commonMaze.getPacman().getCol() == this.col && this.commonMaze.getPacman().getRow() == this.row) {
+                return false;
+            }
         }
+        return this.object == null;
+    }
+
+    @Override
+    public IMazeObject get() {
+        if (this.commonMaze.getPacman() != null) {
+            if (this.commonMaze.getPacman().getCol() == this.col && this.commonMaze.getPacman().getRow() == this.row) {
+                return this.commonMaze.getPacman();
+            }
+        }
+        return this.object;
     }
 
     @Override

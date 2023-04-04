@@ -1,6 +1,6 @@
 package ija.ija2022.homework2.tool.common;
 
-import ija.ija2022.homework2.tool.game.PacmanObject;
+import ija.ija2022.homework2.game.PacmanObject;
 
 public interface IMaze extends CommonMaze, Observable.Observer {
     void setField(int row, int col, IField iField);

@@ -1,4 +1,4 @@
-package ija.ija2022.homework2.tool.game;
+package ija.ija2022.homework2.game;
 
 import ija.ija2022.homework2.tool.common.*;
 import org.jetbrains.annotations.NotNull;
@@ -13,7 +13,7 @@ public class PacmanObject implements IMazeObject {
 
     private int col;
 
-    private int lives;
+    public int lives;
 
     private final IMaze commonMaze;
 
@@ -79,6 +79,10 @@ public class PacmanObject implements IMazeObject {
 
     public int getLives() {
         return this.lives;
+    }
+
+    public void decrLives() {
+        this.lives -= 1;
     }
 
     @Override

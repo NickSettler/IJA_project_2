@@ -5,7 +5,7 @@ import ija.ija2022.homework2.tool.common.CommonMazeObject;
 import ija.ija2022.homework2.tool.common.IField;
 import ija.ija2022.homework2.tool.common.IMaze;
 import ija.ija2022.homework2.tool.common.IMazeObject;
-import ija.ija2022.homework2.tool.game.MazeConfigure;
+import ija.ija2022.homework2.game.MazeConfigure;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

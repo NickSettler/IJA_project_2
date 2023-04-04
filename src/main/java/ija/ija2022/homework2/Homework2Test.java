@@ -2,6 +2,7 @@
  * IJA 2022/23: Úloha 2
  * Testovací třída.
  */
+package ija.ija2022.homework2;
 
 import java.util.List;
 import org.junit.Before;
@@ -9,7 +10,7 @@ import org.junit.Test;
 import org.junit.Assert;
 
 //--- Importy z implementovaneho reseni ukolu
-import ija.ija2022.homework2.tool.game.MazeConfigure;
+import ija.ija2022.homework2.game.MazeConfigure;
 //---
 
 //--- Importy z baliku dodaneho nastroje
@@ -25,9 +26,9 @@ import ija.ija2022.homework2.tool.common.CommonMazeObject;
  * @author Radek Kočí
  */
 public class Homework2Test {
-
+    
     private CommonMaze maze;
-
+       
     /**
      * Vytvoří bludiště, nad kterým se provádějí testy.
      */
@@ -39,14 +40,14 @@ public class Homework2Test {
         cfg.processLine(".X.");
         cfg.processLine(".X.");
         cfg.processLine(".S.");
-        cfg.stopReading();
-        maze = cfg.createMaze();
+        cfg.stopReading();       
+        maze = cfg.createMaze();         
     }
 
     /**
      * Test existence objektu, který reprezentuje ducha.
      * 2 body
-     */
+     */    
     @Test
     public void testGhosts() {
         List<CommonMazeObject> lstGhost = maze.ghosts();
@@ -58,11 +59,11 @@ public class Homework2Test {
                 maze.getField(1, 3),
                 obj.getField());
     }
-
+ 
     /**
      * Test správného pohybu ducha po bludišti.
      * 2 body
-     */
+     */    
     @Test
     public void testGhostMoving() {
         // Ghost na pozici 1,3
@@ -70,9 +71,9 @@ public class Homework2Test {
         Assert.assertTrue("Presun na policko se podari.", obj.move(CommonField.Direction.D));
         Assert.assertTrue("Presun na policko se podari.", obj.move(CommonField.Direction.D));
         Assert.assertTrue("Presun na policko se podari.", obj.move(CommonField.Direction.D));
-        Assert.assertFalse("Presun na policko se nepodari.", obj.move(CommonField.Direction.R));
-    }
-
+        Assert.assertFalse("Presun na policko se nepodari.", obj.move(CommonField.Direction.R));       
+    }    
+   
     /**
      * Test správného chování při setkání ducha s pacmanem (sníží se počet životů pacmana).
      * 3 body
@@ -87,16 +88,16 @@ public class Homework2Test {
         CommonMazeObject pacman = maze.getField(4, 2).get();
         Assert.assertTrue("Objekt je pacman", pacman.isPacman());
         Assert.assertEquals("Pocet zivotu pacmana", 3, pacman.getLives());
-
+        
         Assert.assertTrue("Presun na policko se podari.", ghost.move(CommonField.Direction.D));
         Assert.assertEquals("Pocet zivotu pacmana", 3, pacman.getLives());
         Assert.assertTrue("Presun na policko se podari.", ghost.move(CommonField.Direction.D));
         Assert.assertEquals("Pocet zivotu pacmana", 3, pacman.getLives());
         Assert.assertTrue("Presun na policko se podari.", ghost.move(CommonField.Direction.D));
         Assert.assertEquals("Pocet zivotu pacmana", 3, pacman.getLives());
-        Assert.assertTrue("Presun na policko se podari.", ghost.move(CommonField.Direction.L));
+        Assert.assertTrue("Presun na policko se podari.", ghost.move(CommonField.Direction.L));       
         Assert.assertEquals("Pocet zivotu pacmana", 2, pacman.getLives());
-    }
+    }    
 
     /**
      * Testování notifikací při přesunu objektu (ducha).
@@ -104,8 +105,8 @@ public class Homework2Test {
      */
     @Test
     public void testNotificationGhostMoving() {
-        MazeTester tester = new MazeTester(maze);
-
+        MazeTester tester = new MazeTester(maze);        
+       
         // Ghost na pozici 1,3
         CommonMazeObject obj = maze.ghosts().get(0);
 
@@ -117,7 +118,7 @@ public class Homework2Test {
         testNotificationGhostMoving(tester, true, obj, CommonField.Direction.L);
         testNotificationGhostMoving(tester, true, obj, CommonField.Direction.L);
         testNotificationGhostMoving(tester, true, obj, CommonField.Direction.D);
-
+        
         /* Testy, kdy se presun nepodari (pokus vstoupit do zdi).
          * Nikdo nebude notifikovan.
          */
@@ -136,14 +137,14 @@ public class Homework2Test {
         boolean res;
 
         // Policko, na kterem byl objekt pred zmenou
-        CommonField previous = obj.getField();
+        CommonField previous = obj.getField();        
         // Policko, na kterem ma byt objekt po zmene
         CommonField current = previous.nextField(dir);
 
         // Zadna notifikace zatim neexistuje
         res = tester.checkEmptyNotification();
         Assert.assertTrue("Zadna notifikace.", res);
-
+        
         // Pokud se ma presun podarit
         if (success) {
             Assert.assertTrue("Presun na policko se podari.", obj.move(dir));
@@ -151,14 +152,14 @@ public class Homework2Test {
             // Overeni spravnych notifikaci
             res = tester.checkNotification(msg, obj, current, previous);
             Assert.assertTrue("Test notifikace: " + msg, res);
-        }
+        } 
         // Pokud se nema presun podarit
         else {
-            Assert.assertFalse("Presun na policko se nepodari.", obj.move(dir));
+            Assert.assertFalse("Presun na policko se nepodari.", obj.move(dir));            
             // Zadne notifikace nebyly zaslany
             res = tester.checkEmptyNotification();
             Assert.assertTrue("Zadna notifikace.", res);
         }
     }
-
+    
 }
